@@ -37,7 +37,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: {{ regexReplaceAll ".*:" .Values.env.DRONE_SERVER_PORT "" | atoi }}
               protocol: TCP
           livenessProbe:
             httpGet:
